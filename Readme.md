@@ -1,4 +1,4 @@
-=== TRIP PLANNER ==
+=== VACATION PLANNER ==
 
 This application is to help plan vacations, keeping all the resources in one place
 
