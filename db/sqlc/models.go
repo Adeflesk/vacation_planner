@@ -10,117 +10,117 @@ import (
 )
 
 type AccommmodationNight struct {
-	ID                int64          `db:"id"`
-	Accommodation     int64          `db:"accommodation"`
-	TripId            int64          `db:"tripId"`
-	Date              sql.NullTime   `db:"date"`
-	ReservationNumber sql.NullString `db:"reservationNumber"`
-	CreatedAt         time.Time      `db:"created_at"`
+	ID                int64     `db:"id"`
+	Accommodation     int64     `db:"accommodation"`
+	TripId            int64     `db:"tripId"`
+	Date              time.Time `db:"date"`
+	ReservationNumber string    `db:"reservationNumber"`
+	CreatedAt         time.Time `db:"created_at"`
 }
 
 type Accommodation struct {
-	ID                int64          `db:"id"`
-	AccommodationName sql.NullString `db:"accommodation_name"`
-	Pernight          sql.NullInt64  `db:"pernight"`
-	Type              int64          `db:"type"`
-	Description       sql.NullString `db:"description"`
-	Emailaddress      sql.NullString `db:"emailaddress"`
-	Phonenumber       sql.NullString `db:"phonenumber"`
-	LocationId        int64          `db:"locationId"`
+	ID                int64  `db:"id"`
+	AccommodationName string `db:"accommodation_name"`
+	Pernight          int64  `db:"pernight"`
+	Type              int64  `db:"type"`
+	Description       string `db:"description"`
+	Emailaddress      string `db:"emailaddress"`
+	Phonenumber       string `db:"phonenumber"`
+	LocationId        int64  `db:"locationId"`
 }
 
 type AccommodationType struct {
-	ID   int64          `db:"id"`
-	Type sql.NullString `db:"type"`
+	ID   int64  `db:"id"`
+	Type string `db:"type"`
 }
 
 type Activity struct {
-	ID            int64          `db:"id"`
-	Name          sql.NullString `db:"name"`
-	Activitytype  int64          `db:"activitytype"`
-	Description   sql.NullString `db:"description"`
-	TimeAllocated sql.NullTime   `db:"time_allocated"`
-	LocationID    int64          `db:"location_id"`
+	ID            int64        `db:"id"`
+	Name          string       `db:"name"`
+	Activitytype  int64        `db:"activitytype"`
+	Description   string       `db:"description"`
+	TimeAllocated sql.NullTime `db:"time_allocated"`
+	LocationID    int64        `db:"location_id"`
 }
 
 type ActivityDay struct {
-	ID         int64        `db:"id"`
-	ActivityId int64        `db:"activityId"`
-	TripplanId int64        `db:"tripplanId"`
-	Date       sql.NullTime `db:"date"`
-	CreatedAt  time.Time    `db:"created_at"`
+	ID         int64     `db:"id"`
+	ActivityId int64     `db:"activityId"`
+	TripplanId int64     `db:"tripplanId"`
+	Date       time.Time `db:"date"`
+	CreatedAt  time.Time `db:"created_at"`
 }
 
 type ActivityType struct {
-	ID   int64          `db:"id"`
-	Name sql.NullString `db:"name"`
+	ID   int64  `db:"id"`
+	Name string `db:"name"`
 }
 
 type CarRental struct {
-	ID             int64          `db:"id"`
-	Company        sql.NullString `db:"Company"`
-	Cost           sql.NullInt64  `db:"cost"`
-	BookingRef     sql.NullString `db:"booking_ref"`
-	Website        sql.NullString `db:"website"`
-	Pickupdate     sql.NullTime   `db:"pickupdate"`
-	Dropoffdate    sql.NullTime   `db:"dropoffdate"`
-	Pickuplocation int64          `db:"pickuplocation"`
-	Dropoflocation int64          `db:"dropoflocation"`
-	TripID         int64          `db:"trip_id"`
-	CreatedAt      time.Time      `db:"created_at"`
+	ID             int64     `db:"id"`
+	Company        string    `db:"Company"`
+	Cost           int64     `db:"cost"`
+	BookingRef     string    `db:"booking_ref"`
+	Website        string    `db:"website"`
+	Pickupdate     time.Time `db:"pickupdate"`
+	Dropoffdate    time.Time `db:"dropoffdate"`
+	Pickuplocation int64     `db:"pickuplocation"`
+	Dropoflocation int64     `db:"dropoflocation"`
+	TripID         int64     `db:"trip_id"`
+	CreatedAt      time.Time `db:"created_at"`
 }
 
 type Country struct {
-	ID            int32          `db:"id"`
-	Name          sql.NullString `db:"name"`
-	ContinentName sql.NullString `db:"continent_name"`
+	ID            int64  `db:"id"`
+	Name          string `db:"name"`
+	ContinentName string `db:"continent_name"`
 }
 
 type Flight struct {
-	ID               int64          `db:"id"`
-	Bookingid        sql.NullString `db:"bookingid"`
-	AirlineName      sql.NullString `db:"airline_name"`
-	Airport          sql.NullString `db:"airport"`
-	Cost             sql.NullInt64  `db:"cost"`
-	OriginLocationId int32          `db:"originLocationId"`
-	DestinationId    int32          `db:"destinationId"`
-	TripID           int64          `db:"trip_id"`
-	DepartureDate    sql.NullTime   `db:"departure_date"`
-	CreatedAt        time.Time      `db:"created_at"`
+	ID               int64     `db:"id"`
+	Bookingid        string    `db:"bookingid"`
+	AirlineName      string    `db:"airline_name"`
+	Airport          string    `db:"airport"`
+	Cost             int64     `db:"cost"`
+	OriginLocationId int32     `db:"originLocationId"`
+	DestinationId    int32     `db:"destinationId"`
+	TripID           int64     `db:"trip_id"`
+	DepartureDate    time.Time `db:"departure_date"`
+	CreatedAt        time.Time `db:"created_at"`
 }
 
 type Food struct {
-	ID         int64          `db:"id"`
-	Name       sql.NullString `db:"name"`
-	LocationId int64          `db:"locationId"`
-	Foodtype   int64          `db:"foodtype"`
-	Webaddress sql.NullString `db:"webaddress"`
+	ID         int64  `db:"id"`
+	Name       string `db:"name"`
+	LocationId int64  `db:"locationId"`
+	Foodtype   int64  `db:"foodtype"`
+	Webaddress string `db:"webaddress"`
 }
 
 type FoodPlan struct {
-	ID        int64        `db:"id"`
-	FoodId    int64        `db:"foodId"`
-	TripId    int64        `db:"tripId"`
-	Date      sql.NullTime `db:"date"`
-	CreatedAt time.Time    `db:"created_at"`
+	ID        int64     `db:"id"`
+	FoodId    int64     `db:"foodId"`
+	TripId    int64     `db:"tripId"`
+	Date      time.Time `db:"date"`
+	CreatedAt time.Time `db:"created_at"`
 }
 
 type FoodType struct {
-	ID   int64          `db:"id"`
-	Type sql.NullString `db:"type"`
+	ID   int64  `db:"id"`
+	Type string `db:"type"`
 }
 
 type Location struct {
-	ID                  int64          `db:"id"`
-	LocationName        sql.NullString `db:"location_name"`
-	LocationDescription sql.NullString `db:"location_description"`
-	CountryID           int32          `db:"country_id"`
+	ID                  int64  `db:"id"`
+	LocationName        string `db:"location_name"`
+	LocationDescription string `db:"location_description"`
+	CountryID           int32  `db:"country_id"`
 }
 
 type Tripplan struct {
-	ID        int64          `db:"id"`
-	TripName  sql.NullString `db:"trip_name"`
-	StartDate sql.NullTime   `db:"start_date"`
-	EndDate   sql.NullTime   `db:"end_date"`
-	CreatedAt time.Time      `db:"created_at"`
+	ID        int64     `db:"id"`
+	TripName  string    `db:"trip_name"`
+	StartDate time.Time `db:"start_date"`
+	EndDate   time.Time `db:"end_date"`
+	CreatedAt time.Time `db:"created_at"`
 }

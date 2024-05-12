@@ -19,7 +19,11 @@ migratedown:
 migratedown1:
 	migrate -path db/migration --database "postgresql://root:secret@localhost:5431/vacation_planner?sslmode=disable" -verbose down 1
 	
+sqlc:
+	sqlc generate
 
+test:
+	 go test -v -cover ./...
 
 	
 

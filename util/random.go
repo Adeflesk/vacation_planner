@@ -11,7 +11,7 @@ const alphabet = "abcdefghijklmnopqrstuvwxyz"
 func RandomInt(min, max int64) int64 {
 	return min + rand.Int63n(max-min+1)
 }
-func randomContinents() string {
+func RandomContinents() string {
 	var continents = [...]string{"Africa", "Antarctica", "Asia", "Australia", "Europe", "North America", "South America"}
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	randomIndx := r.Intn(len(continents))

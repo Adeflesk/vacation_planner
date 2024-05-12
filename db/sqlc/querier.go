@@ -9,8 +9,11 @@ import (
 )
 
 type Querier interface {
+	// input: name, continent_name
+	// output :one
 	CreateCountry(ctx context.Context, arg CreateCountryParams) (Country, error)
-	DeleteAuthor(ctx context.Context, id int32) error
+	DeleteCountry(ctx context.Context, id int64) error
+	GetCountry(ctx context.Context, id int64) (Country, error)
 	ListCountries(ctx context.Context) ([]Country, error)
 	UpdateCountry(ctx context.Context, arg UpdateCountryParams) error
 }

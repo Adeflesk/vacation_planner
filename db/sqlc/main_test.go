@@ -5,6 +5,9 @@ import (
 	"log"
 	"os"
 	"testing"
+
+	"github.com/Adeflesk/vacation_planner/util"
+	_ "github.com/lib/pq"
 )
 
 var testQueries *Queries

@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 )
 
 const createCountry = `-- name: CreateCountry :one
@@ -20,10 +19,12 @@ RETURNING id, name, continent_name
 `
 
 type CreateCountryParams struct {
-	Name          sql.NullString `db:"name"`
-	ContinentName sql.NullString `db:"continent_name"`
+	Name          string `db:"name"`
+	ContinentName string `db:"continent_name"`
 }
 
+// input: name, continent_name
+// output :one
 func (q *Queries) CreateCountry(ctx context.Context, arg CreateCountryParams) (Country, error) {
 	row := q.db.QueryRowContext(ctx, createCountry, arg.Name, arg.ContinentName)
 	var i Country
@@ -31,14 +32,26 @@ func (q *Queries) CreateCountry(ctx context.Context, arg CreateCountryParams) (C
 	return i, err
 }
 
-const deleteAuthor = `-- name: DeleteAuthor :exec
+const deleteCountry = `-- name: DeleteCountry :exec
 DELETE FROM countries
 WHERE id = $1
 `
 
-func (q *Queries) DeleteAuthor(ctx context.Context, id int32) error {
-	_, err := q.db.ExecContext(ctx, deleteAuthor, id)
+func (q *Queries) DeleteCountry(ctx context.Context, id int64) error {
+	_, err := q.db.ExecContext(ctx, deleteCountry, id)
 	return err
+}
+
+const getCountry = `-- name: GetCountry :one
+SELECT id, name, continent_name FROM countries
+WHERE id = $1 LIMIT 1
+`
+
+func (q *Queries) GetCountry(ctx context.Context, id int64) (Country, error) {
+	row := q.db.QueryRowContext(ctx, getCountry, id)
+	var i Country
+	err := row.Scan(&i.ID, &i.Name, &i.ContinentName)
+	return i, err
 }
 
 const listCountries = `-- name: ListCountries :many
@@ -77,9 +90,9 @@ WHERE id = $1
 `
 
 type UpdateCountryParams struct {
-	ID            int32          `db:"id"`
-	Name          sql.NullString `db:"name"`
-	ContinentName sql.NullString `db:"continent_name"`
+	ID            int64  `db:"id"`
+	Name          string `db:"name"`
+	ContinentName string `db:"continent_name"`
 }
 
 func (q *Queries) UpdateCountry(ctx context.Context, arg UpdateCountryParams) error {

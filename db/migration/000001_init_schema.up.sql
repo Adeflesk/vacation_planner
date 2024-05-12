@@ -1,46 +1,46 @@
 CREATE TABLE "tripplan" (
   "id" bigserial PRIMARY KEY,
-  "trip_name" varchar,
-  "start_date" date,
-  "end_date" date,
+  "trip_name" varchar NOT NULL,
+  "start_date" date NOT NULL,
+  "end_date" date NOT NULL,
   "created_at" timestamp NOT NULL DEFAULT (now())
 );
 
 CREATE TABLE "countries" (
-  "id" int PRIMARY KEY,
-  "name" varchar,
-  "continent_name" varchar
+  "id" bigserial PRIMARY KEY,
+  "name" varchar NOT NULL,
+  "continent_name" varchar NOT NULL
 );
 
 CREATE TABLE "locations" (
   "id" bigserial PRIMARY KEY,
-  "location_name" varchar,
-  "location_description" varchar,
+  "location_name" varchar NOT NULL,
+  "location_description" varchar NOT NULL,
   "country_id" int NOT NULL
 );
 
 CREATE TABLE "activities" (
   "id" bigserial PRIMARY KEY,
-  "name" varchar,
+  "name" varchar NOT NULL,
   "activitytype" bigint NOT NULL,
-  "description" varchar,
+  "description" varchar NOT NULL,
   "time_allocated" time,
   "location_id" bigint NOT NULL
 );
 
 CREATE TABLE "activityType" (
   "id" bigserial PRIMARY KEY,
-  "name" varchar
+  "name" varchar NOT NULL
 );
 
 CREATE TABLE "car_rental" (
   "id" bigserial PRIMARY KEY,
-  "Company" varchar,
-  "cost" bigint,
-  "booking_ref" varchar,
-  "website" varchar,
-  "pickupdate" timestamp,
-  "dropoffdate" timestamp,
+  "Company" varchar NOT NULL,
+  "cost" bigint NOT NULL,
+  "booking_ref" varchar NOT NULL,
+  "website" varchar NOT NULL,
+  "pickupdate" timestamp NOT NULL,
+  "dropoffdate" timestamp NOT NULL,
   "pickuplocation" bigint NOT NULL,
   "dropoflocation" bigint NOT NULL,
   "trip_id" bigint NOT NULL,
@@ -49,51 +49,51 @@ CREATE TABLE "car_rental" (
 
 CREATE TABLE "flights" (
   "id" bigserial PRIMARY KEY,
-  "bookingid" varchar,
-  "airline_name" varchar,
-  "airport" varchar,
-  "cost" bigint,
+  "bookingid" varchar NOT NULL,
+  "airline_name" varchar NOT NULL,
+  "airport" varchar NOT NULL,
+  "cost" bigint NOT NULL,
   "originLocationId" int NOT NULL,
   "destinationId" int NOT NULL,
   "trip_id" bigint NOT NULL,
-  "departure_date" timestamp,
+  "departure_date" timestamp NOT NULL,
   "created_at" timestamp NOT NULL DEFAULT (now())
 );
 
 CREATE TABLE "accommodation" (
   "id" bigserial PRIMARY KEY,
-  "accommodation_name" varchar,
-  "pernight" bigint,
+  "accommodation_name" varchar NOT NULL,
+  "pernight" bigint NOT NULL,
   "type" bigint NOT NULL,
-  "description" varchar,
-  "emailaddress" varchar,
-  "phonenumber" varchar,
+  "description" varchar NOT NULL,
+  "emailaddress" varchar NOT NULL,
+  "phonenumber" varchar NOT NULL,
   "locationId" bigint NOT NULL
 );
 
 CREATE TABLE "accommodationType" (
   "id" bigserial PRIMARY KEY,
-  "type" varchar
+  "type" varchar NOT NULL
 );
 
 CREATE TABLE "food" (
   "id" bigserial PRIMARY KEY,
-  "name" varchar,
+  "name" varchar NOT NULL,
   "locationId" bigint NOT NULL,
   "foodtype" bigint NOT NULL,
-  "webaddress" varchar
+  "webaddress" varchar NOT NULL
 );
 
 CREATE TABLE "foodType" (
   "id" bigserial PRIMARY KEY,
-  "type" varchar
+  "type" varchar NOT NULL
 );
 
 CREATE TABLE "foodPlan" (
   "id" bigserial PRIMARY KEY,
   "foodId" bigint NOT NULL,
   "tripId" bigint NOT NULL,
-  "date" timestamp,
+  "date" timestamp NOT NULL,
   "created_at" timestamp NOT NULL DEFAULT (now())
 );
 
@@ -101,8 +101,8 @@ CREATE TABLE "AccommmodationNights" (
   "id" bigserial PRIMARY KEY,
   "accommodation" bigint NOT NULL,
   "tripId" bigInt NOT NULL,
-  "date" date,
-  "reservationNumber" varchar,
+  "date" date NOT NULL,
+  "reservationNumber" varchar NOT NULL,
   "created_at" timestamp NOT NULL DEFAULT (now())
 );
 
@@ -110,7 +110,7 @@ CREATE TABLE "activityDays" (
   "id" bigserial PRIMARY KEY,
   "activityId" bigint NOT NULL,
   "tripplanId" bigint NOT NULL,
-  "date" date,
+  "date" date NOT NULL,
   "created_at" timestamp NOT NULL DEFAULT (now())
 );
 

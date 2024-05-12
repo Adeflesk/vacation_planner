@@ -1,3 +1,4 @@
+-- name: GetCountry :one
 SELECT * FROM countries
 WHERE id = $1 LIMIT 1;
 
@@ -6,6 +7,8 @@ SELECT * FROM countries
 ORDER BY name;
 
 -- name: CreateCountry :one
+-- input: name, continent_name
+-- output :one
 INSERT INTO countries (
   name, continent_name
 ) VALUES (
@@ -19,6 +22,6 @@ UPDATE countries
   continent_name = $3
 WHERE id = $1;
 
--- name: DeleteAuthor :exec
+-- name: DeleteCountry :exec
 DELETE FROM countries
 WHERE id = $1;
