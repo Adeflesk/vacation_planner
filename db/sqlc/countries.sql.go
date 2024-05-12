@@ -57,10 +57,17 @@ func (q *Queries) GetCountry(ctx context.Context, id int64) (Country, error) {
 const listCountries = `-- name: ListCountries :many
 SELECT id, name, continent_name FROM countries
 ORDER BY name
+LIMIT $1
+OFFSET $2
 `
 
-func (q *Queries) ListCountries(ctx context.Context) ([]Country, error) {
-	rows, err := q.db.QueryContext(ctx, listCountries)
+type ListCountriesParams struct {
+	Limit  int32 `db:"limit"`
+	Offset int32 `db:"offset"`
+}
+
+func (q *Queries) ListCountries(ctx context.Context, arg ListCountriesParams) ([]Country, error) {
+	rows, err := q.db.QueryContext(ctx, listCountries, arg.Limit, arg.Offset)
 	if err != nil {
 		return nil, err
 	}
@@ -82,11 +89,12 @@ func (q *Queries) ListCountries(ctx context.Context) ([]Country, error) {
 	return items, nil
 }
 
-const updateCountry = `-- name: UpdateCountry :exec
+const updateCountry = `-- name: UpdateCountry :one
 UPDATE countries
   set name = $2,
   continent_name = $3
 WHERE id = $1
+RETURNING id, name, continent_name
 `
 
 type UpdateCountryParams struct {
@@ -95,7 +103,9 @@ type UpdateCountryParams struct {
 	ContinentName string `db:"continent_name"`
 }
 
-func (q *Queries) UpdateCountry(ctx context.Context, arg UpdateCountryParams) error {
-	_, err := q.db.ExecContext(ctx, updateCountry, arg.ID, arg.Name, arg.ContinentName)
-	return err
+func (q *Queries) UpdateCountry(ctx context.Context, arg UpdateCountryParams) (Country, error) {
+	row := q.db.QueryRowContext(ctx, updateCountry, arg.ID, arg.Name, arg.ContinentName)
+	var i Country
+	err := row.Scan(&i.ID, &i.Name, &i.ContinentName)
+	return i, err
 }

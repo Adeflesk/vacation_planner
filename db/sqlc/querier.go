@@ -14,8 +14,8 @@ type Querier interface {
 	CreateCountry(ctx context.Context, arg CreateCountryParams) (Country, error)
 	DeleteCountry(ctx context.Context, id int64) error
 	GetCountry(ctx context.Context, id int64) (Country, error)
-	ListCountries(ctx context.Context) ([]Country, error)
-	UpdateCountry(ctx context.Context, arg UpdateCountryParams) error
+	ListCountries(ctx context.Context, arg ListCountriesParams) ([]Country, error)
+	UpdateCountry(ctx context.Context, arg UpdateCountryParams) (Country, error)
 }
 
 var _ Querier = (*Queries)(nil)

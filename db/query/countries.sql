@@ -4,7 +4,9 @@ WHERE id = $1 LIMIT 1;
 
 -- name: ListCountries :many
 SELECT * FROM countries
-ORDER BY name;
+ORDER BY name
+LIMIT $1
+OFFSET $2;
 
 -- name: CreateCountry :one
 -- input: name, continent_name
@@ -16,11 +18,12 @@ INSERT INTO countries (
 )
 RETURNING *;
 
--- name: UpdateCountry :exec
+-- name: UpdateCountry :one
 UPDATE countries
   set name = $2,
   continent_name = $3
-WHERE id = $1;
+WHERE id = $1
+RETURNING *;
 
 -- name: DeleteCountry :exec
 DELETE FROM countries
