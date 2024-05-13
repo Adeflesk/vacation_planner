@@ -84,3 +84,17 @@ func TestListCountries(t *testing.T) {
 		require.NotEmpty(t, country)
 	}
 }
+
+func TestGetCountriesByContinent(t *testing.T) {
+	country1 := createRandomCountry(t)
+	continentName := country1.ContinentName
+
+	countries, err := testQueries.GetCountriesByContinent(context.Background(), continentName)
+
+	require.NoError(t, err)
+	require.NotEmpty(t, countries)
+
+	for _, country := range countries {
+		require.Equal(t, country.ContinentName, continentName)
+	}
+}

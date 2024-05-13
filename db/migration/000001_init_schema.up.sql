@@ -28,7 +28,7 @@ CREATE TABLE "activities" (
   "location_id" bigint NOT NULL
 );
 
-CREATE TABLE "activityType" (
+CREATE TABLE "activity_type" (
   "id" bigserial PRIMARY KEY,
   "name" varchar NOT NULL
 );
@@ -71,7 +71,7 @@ CREATE TABLE "accommodation" (
   "locationId" bigint NOT NULL
 );
 
-CREATE TABLE "accommodationType" (
+CREATE TABLE "accommodation_type" (
   "id" bigserial PRIMARY KEY,
   "type" varchar NOT NULL
 );
@@ -84,12 +84,12 @@ CREATE TABLE "food" (
   "webaddress" varchar NOT NULL
 );
 
-CREATE TABLE "foodType" (
+CREATE TABLE "food_type" (
   "id" bigserial PRIMARY KEY,
   "type" varchar NOT NULL
 );
 
-CREATE TABLE "foodPlan" (
+CREATE TABLE "food_plan" (
   "id" bigserial PRIMARY KEY,
   "foodId" bigint NOT NULL,
   "tripId" bigint NOT NULL,
@@ -97,7 +97,7 @@ CREATE TABLE "foodPlan" (
   "created_at" timestamp NOT NULL DEFAULT (now())
 );
 
-CREATE TABLE "AccommmodationNights" (
+CREATE TABLE "accommmodation_nights" (
   "id" bigserial PRIMARY KEY,
   "accommodation" bigint NOT NULL,
   "tripId" bigInt NOT NULL,
@@ -106,7 +106,7 @@ CREATE TABLE "AccommmodationNights" (
   "created_at" timestamp NOT NULL DEFAULT (now())
 );
 
-CREATE TABLE "activityDays" (
+CREATE TABLE "activity_days" (
   "id" bigserial PRIMARY KEY,
   "activityId" bigint NOT NULL,
   "tripplanId" bigint NOT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE "activityDays" (
 
 ALTER TABLE "locations" ADD FOREIGN KEY ("country_id") REFERENCES "countries" ("id");
 
-ALTER TABLE "activities" ADD FOREIGN KEY ("activitytype") REFERENCES "activityType" ("id");
+ALTER TABLE "activities" ADD FOREIGN KEY ("activitytype") REFERENCES "activity_type" ("id");
 
 ALTER TABLE "activities" ADD FOREIGN KEY ("location_id") REFERENCES "locations" ("id");
 
@@ -132,22 +132,22 @@ ALTER TABLE "flights" ADD FOREIGN KEY ("destinationId") REFERENCES "locations" (
 
 ALTER TABLE "flights" ADD FOREIGN KEY ("trip_id") REFERENCES "tripplan" ("id");
 
-ALTER TABLE "accommodation" ADD FOREIGN KEY ("type") REFERENCES "accommodationType" ("id");
+ALTER TABLE "accommodation" ADD FOREIGN KEY ("type") REFERENCES "accommodation_type" ("id");
 
 ALTER TABLE "accommodation" ADD FOREIGN KEY ("locationId") REFERENCES "locations" ("id");
 
 ALTER TABLE "food" ADD FOREIGN KEY ("locationId") REFERENCES "locations" ("id");
 
-ALTER TABLE "food" ADD FOREIGN KEY ("foodtype") REFERENCES "foodType" ("id");
+ALTER TABLE "food" ADD FOREIGN KEY ("foodtype") REFERENCES "food_type" ("id");
 
-ALTER TABLE "foodPlan" ADD FOREIGN KEY ("foodId") REFERENCES "food" ("id");
+ALTER TABLE "food_plan" ADD FOREIGN KEY ("foodId") REFERENCES "food" ("id");
 
-ALTER TABLE "foodPlan" ADD FOREIGN KEY ("tripId") REFERENCES "tripplan" ("id");
+ALTER TABLE "food_plan" ADD FOREIGN KEY ("tripId") REFERENCES "tripplan" ("id");
 
-ALTER TABLE "AccommmodationNights" ADD FOREIGN KEY ("accommodation") REFERENCES "accommodation" ("id");
+ALTER TABLE "accommmodation_nights" ADD FOREIGN KEY ("accommodation") REFERENCES "accommodation" ("id");
 
-ALTER TABLE "AccommmodationNights" ADD FOREIGN KEY ("tripId") REFERENCES "tripplan" ("id");
+ALTER TABLE "accommmodation_nights" ADD FOREIGN KEY ("tripId") REFERENCES "tripplan" ("id");
 
-ALTER TABLE "activityDays" ADD FOREIGN KEY ("activityId") REFERENCES "activities" ("id");
+ALTER TABLE "activity_days" ADD FOREIGN KEY ("activityId") REFERENCES "activities" ("id");
 
-ALTER TABLE "activityDays" ADD FOREIGN KEY ("tripplanId") REFERENCES "tripplan" ("id");
+ALTER TABLE "activity_days" ADD FOREIGN KEY ("tripplanId") REFERENCES "tripplan" ("id");

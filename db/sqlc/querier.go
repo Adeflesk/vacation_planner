@@ -9,13 +9,35 @@ import (
 )
 
 type Querier interface {
+	// input: type
+	// output :one
+	CreateAccommodation_type(ctx context.Context, type_ string) (AccommodationType, error)
 	// input: name, continent_name
 	// output :one
 	CreateCountry(ctx context.Context, arg CreateCountryParams) (Country, error)
+	// input: name
+	// output :one
+	Createactivity_type(ctx context.Context, name string) (ActivityType, error)
+	// input: type
+	// output :one
+	Createfood_type(ctx context.Context, type_ string) (FoodType, error)
+	DeleteAccommodation_type(ctx context.Context, id int64) error
 	DeleteCountry(ctx context.Context, id int64) error
+	Deleteactivity_type(ctx context.Context, id int64) error
+	Deletefood_type(ctx context.Context, id int64) error
+	GetAccommodation_type(ctx context.Context, id int64) (AccommodationType, error)
+	GetCountriesByContinent(ctx context.Context, continentName string) ([]Country, error)
 	GetCountry(ctx context.Context, id int64) (Country, error)
+	Getactivity_type(ctx context.Context, id int64) (ActivityType, error)
+	Getfood_type(ctx context.Context, id int64) (FoodType, error)
+	ListAccommodation_types(ctx context.Context, arg ListAccommodation_typesParams) ([]AccommodationType, error)
 	ListCountries(ctx context.Context, arg ListCountriesParams) ([]Country, error)
+	Listactivity_types(ctx context.Context, arg Listactivity_typesParams) ([]ActivityType, error)
+	Listfood_types(ctx context.Context, arg Listfood_typesParams) ([]FoodType, error)
+	UpdateAccommodation_type(ctx context.Context, arg UpdateAccommodation_typeParams) (AccommodationType, error)
 	UpdateCountry(ctx context.Context, arg UpdateCountryParams) (Country, error)
+	Updateactivity_type(ctx context.Context, arg Updateactivity_typeParams) (ActivityType, error)
+	Updatefood_type(ctx context.Context, arg Updatefood_typeParams) (FoodType, error)
 }
 
 var _ Querier = (*Queries)(nil)

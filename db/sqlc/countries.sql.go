@@ -42,6 +42,34 @@ func (q *Queries) DeleteCountry(ctx context.Context, id int64) error {
 	return err
 }
 
+const getCountriesByContinent = `-- name: GetCountriesByContinent :many
+SELECT id, name, continent_name FROM countries
+WHERE continent_name = $1
+`
+
+func (q *Queries) GetCountriesByContinent(ctx context.Context, continentName string) ([]Country, error) {
+	rows, err := q.db.QueryContext(ctx, getCountriesByContinent, continentName)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []Country{}
+	for rows.Next() {
+		var i Country
+		if err := rows.Scan(&i.ID, &i.Name, &i.ContinentName); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const getCountry = `-- name: GetCountry :one
 SELECT id, name, continent_name FROM countries
 WHERE id = $1 LIMIT 1

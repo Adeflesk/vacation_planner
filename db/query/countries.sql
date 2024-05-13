@@ -2,6 +2,10 @@
 SELECT * FROM countries
 WHERE id = $1 LIMIT 1;
 
+-- name: GetCountriesByContinent :many
+SELECT * FROM countries
+WHERE continent_name = $1;
+
 -- name: ListCountries :many
 SELECT * FROM countries
 ORDER BY name
