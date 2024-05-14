@@ -32,3 +32,22 @@ func RandomString(n int) string {
 func RandomCountry() string {
 	return RandomString(8)
 }
+
+func RandomWebsite() string {
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	// Slice of popular website name prefixes
+	websites := []string{"www.", "", "blog.", "news."}
+	//Slice of common top-level domains
+	domains := []string{".com", ".net", ".org", ".io", ".co.uk", ".co.jp"}
+
+	// Randomly select a website prefix
+	websitePrefix := websites[r.Intn(len(websites))]
+	//Randomly select a domian
+	domain := domains[r.Intn(len(domains))]
+
+	randomWord := RandomString(8)
+
+	//Concatenate website prefix and domain
+	return websitePrefix + randomWord + domain
+
+}

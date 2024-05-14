@@ -37,7 +37,7 @@ type AccommodationType struct {
 type Activity struct {
 	ID            int64        `db:"id"`
 	Name          string       `db:"name"`
-	Activitytype  int64        `db:"activitytype"`
+	ActivityType  int64        `db:"activity_type"`
 	Description   string       `db:"description"`
 	TimeAllocated sql.NullTime `db:"time_allocated"`
 	LocationID    int64        `db:"location_id"`
@@ -92,8 +92,8 @@ type Flight struct {
 type Food struct {
 	ID         int64  `db:"id"`
 	Name       string `db:"name"`
-	LocationId int64  `db:"locationId"`
-	Foodtype   int64  `db:"foodtype"`
+	Area       int64  `db:"area"`
+	FoodType   int64  `db:"food_type"`
 	Webaddress string `db:"webaddress"`
 }
 
@@ -114,7 +114,7 @@ type Location struct {
 	ID                  int64  `db:"id"`
 	LocationName        string `db:"location_name"`
 	LocationDescription string `db:"location_description"`
-	CountryID           int32  `db:"country_id"`
+	CountryID           int64  `db:"country_id"`
 }
 
 type Tripplan struct {

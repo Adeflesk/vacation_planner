@@ -16,13 +16,13 @@ CREATE TABLE "locations" (
   "id" bigserial PRIMARY KEY,
   "location_name" varchar NOT NULL,
   "location_description" varchar NOT NULL,
-  "country_id" int NOT NULL
+  "country_id" bigint NOT NULL
 );
 
 CREATE TABLE "activities" (
   "id" bigserial PRIMARY KEY,
   "name" varchar NOT NULL,
-  "activitytype" bigint NOT NULL,
+  "activity_type" bigint NOT NULL,
   "description" varchar NOT NULL,
   "time_allocated" time,
   "location_id" bigint NOT NULL
@@ -79,8 +79,8 @@ CREATE TABLE "accommodation_type" (
 CREATE TABLE "food" (
   "id" bigserial PRIMARY KEY,
   "name" varchar NOT NULL,
-  "locationId" bigint NOT NULL,
-  "foodtype" bigint NOT NULL,
+  "area" bigint NOT NULL,
+  "food_type" bigint NOT NULL,
   "webaddress" varchar NOT NULL
 );
 
@@ -116,7 +116,7 @@ CREATE TABLE "activity_days" (
 
 ALTER TABLE "locations" ADD FOREIGN KEY ("country_id") REFERENCES "countries" ("id");
 
-ALTER TABLE "activities" ADD FOREIGN KEY ("activitytype") REFERENCES "activity_type" ("id");
+ALTER TABLE "activities" ADD FOREIGN KEY ("activity_type") REFERENCES "activity_type" ("id");
 
 ALTER TABLE "activities" ADD FOREIGN KEY ("location_id") REFERENCES "locations" ("id");
 
@@ -136,9 +136,9 @@ ALTER TABLE "accommodation" ADD FOREIGN KEY ("type") REFERENCES "accommodation_t
 
 ALTER TABLE "accommodation" ADD FOREIGN KEY ("locationId") REFERENCES "locations" ("id");
 
-ALTER TABLE "food" ADD FOREIGN KEY ("locationId") REFERENCES "locations" ("id");
+ALTER TABLE "food" ADD FOREIGN KEY ("area") REFERENCES "locations" ("id");
 
-ALTER TABLE "food" ADD FOREIGN KEY ("foodtype") REFERENCES "food_type" ("id");
+ALTER TABLE "food" ADD FOREIGN KEY ("food_type") REFERENCES "food_type" ("id");
 
 ALTER TABLE "food_plan" ADD FOREIGN KEY ("foodId") REFERENCES "food" ("id");
 
