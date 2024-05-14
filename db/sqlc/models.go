@@ -19,14 +19,15 @@ type AccommmodationNight struct {
 }
 
 type Accommodation struct {
-	ID                int64  `db:"id"`
-	AccommodationName string `db:"accommodation_name"`
-	Pernight          int64  `db:"pernight"`
-	Type              int64  `db:"type"`
-	Description       string `db:"description"`
-	Emailaddress      string `db:"emailaddress"`
-	Phonenumber       string `db:"phonenumber"`
-	LocationId        int64  `db:"locationId"`
+	ID                       int64  `db:"id"`
+	AccommodationName        string `db:"accommodation_name"`
+	Pernight                 int64  `db:"pernight"`
+	AccommodationType        int64  `db:"accommodation_type"`
+	AccommodationDescription string `db:"accommodation_description"`
+	Webaddress               string `db:"webaddress"`
+	Emailaddress             string `db:"emailaddress"`
+	Phonenumber              string `db:"phonenumber"`
+	Area                     int64  `db:"area"`
 }
 
 type AccommodationType struct {

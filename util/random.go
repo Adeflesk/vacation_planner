@@ -1,6 +1,7 @@
 package util
 
 import (
+	"fmt"
 	"math/rand"
 	"strings"
 	"time"
@@ -50,4 +51,49 @@ func RandomWebsite() string {
 	//Concatenate website prefix and domain
 	return websitePrefix + randomWord + domain
 
+}
+
+const (
+	letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	numBytes    = "0123456789"
+)
+
+// GenerateRandomEmail generates a random email address with a random username and a common domain
+func GenerateRandomEmail() string {
+
+	// Username generation
+	usernameLength := rand.Intn(15) + 5 // Username between 5 and 20 characters
+	username := make([]byte, usernameLength)
+	for i := range username {
+		if i%2 == 0 {
+			username[i] = letterBytes[rand.Intn(len(letterBytes))]
+		} else {
+			username[i] = numBytes[rand.Intn(len(numBytes))]
+		}
+	}
+
+	// Domain selection
+	domains := []string{"gmail.com", "yahoo.com", "hotmail.com"}
+	domain := domains[rand.Intn(len(domains))]
+
+	// Combine username and domain
+	return string(username) + "@" + domain
+}
+
+// GenerateRandomPhoneNumber generates a random phone number in the specified format
+func GenerateRandomPhoneNumber() (string, error) {
+
+	// Define area code range (you can adjust this to a specific range)
+	minAreaCode := 201
+	maxAreaCode := 990
+
+	// Generate random digits for phone number parts
+	areaCode := rand.Intn(maxAreaCode-minAreaCode+1) + minAreaCode
+	firstThree := rand.Intn(900) + 100 // Ensure 3-digit numbers starting from 100
+	secondThree := rand.Intn(900) + 100
+
+	// Format the phone number string
+	phoneNumber := fmt.Sprintf("%d-%03d-%03d-%d", areaCode, firstThree, secondThree, rand.Intn(9000)+1000)
+
+	return phoneNumber, nil
 }

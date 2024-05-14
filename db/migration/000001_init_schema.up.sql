@@ -64,11 +64,12 @@ CREATE TABLE "accommodation" (
   "id" bigserial PRIMARY KEY,
   "accommodation_name" varchar NOT NULL,
   "pernight" bigint NOT NULL,
-  "type" bigint NOT NULL,
-  "description" varchar NOT NULL,
+  "accommodation_type" bigint NOT NULL,
+  "accommodation_description" varchar NOT NULL,
+  "webaddress" varchar NOT NULL,
   "emailaddress" varchar NOT NULL,
   "phonenumber" varchar NOT NULL,
-  "locationId" bigint NOT NULL
+  "area" bigint NOT NULL
 );
 
 CREATE TABLE "accommodation_type" (
@@ -132,9 +133,9 @@ ALTER TABLE "flights" ADD FOREIGN KEY ("destinationId") REFERENCES "locations" (
 
 ALTER TABLE "flights" ADD FOREIGN KEY ("trip_id") REFERENCES "tripplan" ("id");
 
-ALTER TABLE "accommodation" ADD FOREIGN KEY ("type") REFERENCES "accommodation_type" ("id");
+ALTER TABLE "accommodation" ADD FOREIGN KEY ("accommodation_type") REFERENCES "accommodation_type" ("id");
 
-ALTER TABLE "accommodation" ADD FOREIGN KEY ("locationId") REFERENCES "locations" ("id");
+ALTER TABLE "accommodation" ADD FOREIGN KEY ("area") REFERENCES "locations" ("id");
 
 ALTER TABLE "food" ADD FOREIGN KEY ("area") REFERENCES "locations" ("id");
 
