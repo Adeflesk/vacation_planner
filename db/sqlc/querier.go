@@ -15,6 +15,9 @@ type Querier interface {
 	// input: type
 	// output :one
 	CreateAccommodation_type(ctx context.Context, type_ string) (AccommodationType, error)
+	// input: activity_name, activity_type, description, webaddress, time_allocated, area
+	// output :one
+	CreateActivity(ctx context.Context, arg CreateActivityParams) (Activity, error)
 	// input: name, continent_name
 	// output :one
 	CreateCountry(ctx context.Context, arg CreateCountryParams) (Country, error)
@@ -32,6 +35,7 @@ type Querier interface {
 	Createfood_type(ctx context.Context, type_ string) (FoodType, error)
 	DeleteAccommodation(ctx context.Context, id int64) error
 	DeleteAccommodation_type(ctx context.Context, id int64) error
+	DeleteActivity(ctx context.Context, id int64) error
 	DeleteCountry(ctx context.Context, id int64) error
 	DeleteFood(ctx context.Context, id int64) error
 	DeleteLocation(ctx context.Context, id int64) error
@@ -40,6 +44,8 @@ type Querier interface {
 	GetAccommodation(ctx context.Context, id int64) (Accommodation, error)
 	GetAccommodationByLocation(ctx context.Context, area int64) ([]Accommodation, error)
 	GetAccommodation_type(ctx context.Context, id int64) (AccommodationType, error)
+	GetActivity(ctx context.Context, id int64) (Activity, error)
+	GetActivityByLocation(ctx context.Context, area int64) ([]Activity, error)
 	GetCountriesByContinent(ctx context.Context, continentName string) ([]Country, error)
 	GetCountry(ctx context.Context, id int64) (Country, error)
 	GetFood(ctx context.Context, id int64) (Food, error)
@@ -50,6 +56,7 @@ type Querier interface {
 	Getfood_type(ctx context.Context, id int64) (FoodType, error)
 	ListAccommodation(ctx context.Context, arg ListAccommodationParams) ([]Accommodation, error)
 	ListAccommodation_types(ctx context.Context, arg ListAccommodation_typesParams) ([]AccommodationType, error)
+	ListActivity(ctx context.Context, arg ListActivityParams) ([]Activity, error)
 	ListCountries(ctx context.Context, arg ListCountriesParams) ([]Country, error)
 	ListLocations(ctx context.Context, arg ListLocationsParams) ([]Location, error)
 	Listactivity_types(ctx context.Context, arg Listactivity_typesParams) ([]ActivityType, error)
@@ -57,6 +64,7 @@ type Querier interface {
 	Listfood_types(ctx context.Context, arg Listfood_typesParams) ([]FoodType, error)
 	UpdateAccommodation(ctx context.Context, arg UpdateAccommodationParams) (Accommodation, error)
 	UpdateAccommodation_type(ctx context.Context, arg UpdateAccommodation_typeParams) (AccommodationType, error)
+	UpdateActivity(ctx context.Context, arg UpdateActivityParams) (Activity, error)
 	UpdateCountry(ctx context.Context, arg UpdateCountryParams) (Country, error)
 	UpdateFood(ctx context.Context, arg UpdateFoodParams) (Food, error)
 	UpdateLocation(ctx context.Context, arg UpdateLocationParams) (Location, error)

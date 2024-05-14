@@ -5,7 +5,6 @@
 package db
 
 import (
-	"database/sql"
 	"time"
 )
 
@@ -36,12 +35,13 @@ type AccommodationType struct {
 }
 
 type Activity struct {
-	ID            int64        `db:"id"`
-	Name          string       `db:"name"`
-	ActivityType  int64        `db:"activity_type"`
-	Description   string       `db:"description"`
-	TimeAllocated sql.NullTime `db:"time_allocated"`
-	LocationID    int64        `db:"location_id"`
+	ID            int64  `db:"id"`
+	ActivityName  string `db:"activity_name"`
+	ActivityType  int64  `db:"activity_type"`
+	Description   string `db:"description"`
+	Webaddress    string `db:"webaddress"`
+	TimeAllocated int64  `db:"time_allocated"`
+	Area          int64  `db:"area"`
 }
 
 type ActivityDay struct {

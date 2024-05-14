@@ -97,3 +97,22 @@ func GenerateRandomPhoneNumber() (string, error) {
 
 	return phoneNumber, nil
 }
+func GenerateRandomTime() (time.Time, error) {
+
+	// Minimum time is 10 minutes after the current time
+	minTime := time.Now().Add(10 * time.Minute)
+
+	// Maximum time is 5 hours after the current time
+	maxTime := time.Now().Add(5 * time.Hour)
+
+	// Calculate the difference between minimum and maximum time
+	duration := maxTime.Sub(minTime)
+
+	// Generate a random duration within the specified range (0 to difference between max and min)
+	randomDuration := rand.Int63n(int64(duration))
+
+	// Add the random duration to the minimum time to get the random time
+	randomTime := minTime.Add(time.Duration(randomDuration))
+
+	return randomTime, nil
+}

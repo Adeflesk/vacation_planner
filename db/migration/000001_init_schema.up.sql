@@ -19,13 +19,14 @@ CREATE TABLE "locations" (
   "country_id" bigint NOT NULL
 );
 
-CREATE TABLE "activities" (
+CREATE TABLE "activity" (
   "id" bigserial PRIMARY KEY,
-  "name" varchar NOT NULL,
+  "activity_name" varchar NOT NULL,
   "activity_type" bigint NOT NULL,
   "description" varchar NOT NULL,
-  "time_allocated" time,
-  "location_id" bigint NOT NULL
+  "webaddress" varchar NOT NULL,
+  "time_allocated" bigint NOT NULL,
+  "area" bigint NOT NULL
 );
 
 CREATE TABLE "activity_type" (
@@ -117,9 +118,9 @@ CREATE TABLE "activity_days" (
 
 ALTER TABLE "locations" ADD FOREIGN KEY ("country_id") REFERENCES "countries" ("id");
 
-ALTER TABLE "activities" ADD FOREIGN KEY ("activity_type") REFERENCES "activity_type" ("id");
+ALTER TABLE "activity" ADD FOREIGN KEY ("activity_type") REFERENCES "activity_type" ("id");
 
-ALTER TABLE "activities" ADD FOREIGN KEY ("location_id") REFERENCES "locations" ("id");
+ALTER TABLE "activity" ADD FOREIGN KEY ("area") REFERENCES "locations" ("id");
 
 ALTER TABLE "car_rental" ADD FOREIGN KEY ("pickuplocation") REFERENCES "locations" ("id");
 
@@ -149,6 +150,6 @@ ALTER TABLE "accommmodation_nights" ADD FOREIGN KEY ("accommodation") REFERENCES
 
 ALTER TABLE "accommmodation_nights" ADD FOREIGN KEY ("tripId") REFERENCES "tripplan" ("id");
 
-ALTER TABLE "activity_days" ADD FOREIGN KEY ("activityId") REFERENCES "activities" ("id");
+ALTER TABLE "activity_days" ADD FOREIGN KEY ("activityId") REFERENCES "activity" ("id");
 
 ALTER TABLE "activity_days" ADD FOREIGN KEY ("tripplanId") REFERENCES "tripplan" ("id");
